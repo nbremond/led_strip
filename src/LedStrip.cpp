@@ -6,23 +6,14 @@
 #include <time.h>
 
 
-#define DATA    0
-#define CLOCK   7
-#define RED_LED 1
-#define GREEN_LED     3
-
-
 void LedStrip::init(){
     wiringPiSetup();
-
-    pinMode(DATA, OUTPUT) ;
-    pinMode(CLOCK, OUTPUT);
-    pinMode(RED_LED, OUTPUT);
-    pinMode(GREEN_LED, OUTPUT);
 }
 
-LedStrip::LedStrip(unsigned int length):
-    length(length), parent(NULL){
+LedStrip::LedStrip(unsigned int dataPin, unsigned int clockPin, unsigned int length):
+    DATA(dataPin), CLOCK(clockPin), length(length), parent(NULL){
+        pinMode(DATA, OUTPUT) ;
+        pinMode(CLOCK, OUTPUT);
         ledColor = (Color*) malloc(length * sizeof(*ledColor));
         for (unsigned int i=0; i< length; i++){
             ledColor[i] = Color();// set the first bit of each paquet.
@@ -36,7 +27,7 @@ unsigned int LedStrip::getLength()const{
 }
 
 LedStrip::LedStrip(Color* tab, unsigned int length, LedStrip* parent):
-    length(length),ledColor(tab),parent(parent){
+    DATA(0), CLOCK(0), length(length),ledColor(tab),parent(parent){
 
     }
 
@@ -45,8 +36,6 @@ LedStrip LedStrip::subStrip(unsigned int start, unsigned int end){
 }
 
 void LedStrip::setColor(unsigned int pos, Color color){
-    digitalWrite(RED_LED,HIGH);
-
     struct timespec t;
     t.tv_sec=0;
     t.tv_nsec = 100000;//5000000;
@@ -54,7 +43,6 @@ void LedStrip::setColor(unsigned int pos, Color color){
 
     assert(pos < length);
     ledColor[pos] = color;
-    digitalWrite(RED_LED,LOW);
 }
 
 void LedStrip::fill(Color color){
@@ -69,7 +57,6 @@ void LedStrip::show() const{
         return;
     }
 
-    digitalWrite(GREEN_LED,HIGH);
     struct timespec t;
     t.tv_sec=0;
     t.tv_nsec = 1000;
@@ -92,7 +79,6 @@ void LedStrip::show() const{
         }
     }
 
-        digitalWrite(GREEN_LED,LOW);
 }
 
 void LedStrip::setGlobalLight(char level){
