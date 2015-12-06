@@ -23,7 +23,7 @@ class LedStrip{
     LedStrip(unsigned int dataPin, unsigned int clockPin, unsigned int length);
     unsigned int getLength() const;
     LedStrip subStrip(unsigned int start, unsigned int end);
-    void setColor(unsigned int pos, Color color);
+    virtual void setColor(unsigned int pos, Color color);
     void fill(Color color);
     void show() const;
     void setGlobalLight(char level);

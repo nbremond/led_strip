@@ -36,12 +36,7 @@ LedStrip LedStrip::subStrip(unsigned int start, unsigned int end){
 }
 
 void LedStrip::setColor(unsigned int pos, Color color){
-    struct timespec t;
-    t.tv_sec=0;
-    t.tv_nsec = 100000;//5000000;
-    nanosleep(&t,NULL);
-
-    assert(pos < length);
+    assert(0 <= pos && pos < length);
     ledColor[pos] = color;
 }
 
