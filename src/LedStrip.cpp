@@ -102,21 +102,51 @@ void LedStrip::setGlobalLight(char level){
         0,0x4000,0x2000,0x1000,0x0800,
         0,0x0200,0x0100,0x0080,0x0040,
         0,0x0010,0x0008,0x0004,0x0002};
+    static uint16_t no_blue_2[16] = {0x8000,
+        0,0,0,0x4000,0x2000,
+        0,0,0,0x0200,0x0100,
+        0,0,0,0,0x0010};
+    static uint16_t no_blue_3[16] = {0x8000,
+        0,0,0x4000,0x2000,0x1000,
+        0,0,0x0200,0x0100,0x0080,
+        0,0,0,0,0x0010};
+    static uint16_t no_blue_4[16] = {0x8000,
+        0,0x4000,0x2000,0x1000,0x0800,
+        0,0x0200,0x0100,0x0080,0x0040,
+        0,0,0,0,0x0010};
+    static uint16_t no_blue_5[16]={0x8000,
+        0x4000,0x2000,0x1000,0x0800,0x0400,
+        0x0200,0x0100,0x0080,0x0040,0x0020,
+        0,0,0,0,0x0010};
     switch (level){
         case 0 :
+        case 6 :
             new_mask = mask_0;
             break;
         case 1 :
+        case 7 :
             new_mask=mask_1;
             break;
         case 2 :
             new_mask=mask_2;
             break;
+        case 8 :
+            new_mask=no_blue_2;
+            break;
         case 3 :
             new_mask=mask_3;
             break;
+        case 9 :
+            new_mask=no_blue_3;
+            break;
         case 4 :
             new_mask=mask_4;
+            break;
+        case 10 :
+            new_mask=no_blue_4;
+            break;
+        case 11 :
+            new_mask=no_blue_5;
             break;
         default :
             new_mask=default_mask;
