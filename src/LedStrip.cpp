@@ -69,7 +69,7 @@ void LedStrip::show() const{
         for (int i = 0; i <16; i++){
             digitalWrite(CLOCK, 0);
             digitalWrite(DATA,value & mask[i]);
-            nanosleep(&t,NULL);
+//            nanosleep(&t,NULL);
             digitalWrite(CLOCK, 1);
         }
     }

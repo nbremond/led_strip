@@ -22,12 +22,12 @@ class Animation{
     clock_t lastUpdate;
     clock_t updateDiff;///< the number of ticks between two update.
     std::thread *thread;
-    bool stopThread;///< the thread loop will check this atribute to know when stop.
 
 
     //Animation(bool threaded, int freq, void (*threadFunction)(Animation*)=autoRefresh);
 
     protected :
+    bool stopThread;///< the thread loop will check this atribute to know when stop.
     static void autoRefresh(Animation *);
     LedStrip* leds;
 

@@ -18,8 +18,8 @@ Animation::Animation(bool threaded, int freq, void (*threadFunction)(Animation*)
 
         if (threaded){
             //threadFunction = autoCall;
-            thread = new std::thread(threadFunction, this);
             stopThread = false;
+            thread = new std::thread(threadFunction, this);
         }else{
             thread = NULL;
         }

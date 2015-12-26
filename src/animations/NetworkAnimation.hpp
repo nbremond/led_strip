@@ -6,9 +6,12 @@
 class NetworkAnimation : public Animation{
     int sock;
 
+    static void mainThread(Animation* a);
+    
     public :
         NetworkAnimation();
 
+    virtual void doAnimationStep();
 };
 
 #endif
